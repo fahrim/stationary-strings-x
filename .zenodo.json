@@ -1,0 +1,20 @@
+{
+  "title": "Stationary Strings Theorem X: Tokamak H-Mode and ELM Suppression, Runaway Electron-Positron Avalanche Quench, and the 30-Decade Universal Vortex-String Scaling Law",
+  "description": "Tenth and capstone link of the series (October 2026): Tokamak H-mode pedestal enhancement and FENE-P RMP ELM suppression for ITER and SPARC (Theorem X.1, Test T26), chiral-elastic Connor-Hastie critical field enhancement and disruption runaway electron-positron avalanche quench (Theorem X.2, Test T27), 30-decade universal vortex-string scaling law from superfluid He-4 vortices to galactic halos (Theorem X.3, Test T28), and independent 6-point cross-check. Full paper in Turkish and English.",
+  "creators": [
+    {
+      "name": "Meral, Fahri"
+    }
+  ],
+  "license": {
+    "id": "CC-BY-4.0"
+  },
+  "keywords": [
+    "tokamak H-mode",
+    "ELM suppression",
+    "runaway electrons",
+    "ITER",
+    "SPARC",
+    "universal scaling law"
+  ]
+}

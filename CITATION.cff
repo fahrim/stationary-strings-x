@@ -1,0 +1,19 @@
+cff-version: 1.2.0
+title: "Stationary Strings Theorem X: Tokamak H-Mode and ELM Suppression, Runaway Electron-Positron Avalanche Quench, and the 30-Decade Universal Vortex-String Scaling Law"
+message: "If you use this work, please cite it."
+type: unpublished
+authors:
+  - family-names: Meral
+    given-names: Fahri
+date-released: 2026-10-17
+version: v1
+repository-code: "https://github.com/fahrim/stationary-strings-x"
+license: CC-BY-4.0
+keywords:
+  - Navier-Stokes
+  - tokamak H-mode
+  - ELM suppression
+  - runaway electrons
+  - ITER
+  - SPARC
+  - universal scaling law

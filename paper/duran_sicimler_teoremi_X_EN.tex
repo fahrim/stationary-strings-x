@@ -1,0 +1,236 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{amsmath, amssymb, amsfonts}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{setspace}
+\usepackage{url}
+\usepackage{xurl}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usetikzlibrary{babel}
+
+\onehalfspacing
+
+\title{\textbf{Stationary Strings Theorem X: Tokamak H-Mode and ELM Suppression, Runaway Electron-Positron Avalanche Quench, and the 30-Decade Universal Vortex-String Scaling Law} \\[0.3cm]
+\large (ITER / SPARC Super-Peeling-Ballooning Limit, Connor--Hastie Critical Field Enhancement, and $10^{-10}\text{ m}\to 10^{20}\text{ m}$ Scale Invariance)}
+\author{Fahri Meral}
+\date{October 17, 2026}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+As the 10th and capstone link of the Stationary Strings Theorem I--IX series, this work applies the zero-parameter constants locked across the preceding nine papers ($\Lambda_{\mathrm{Meral}}^{(0)} = 0.07226943267767906$, $\mu_s^{\mathrm{Meral}} = 2\sqrt{2}\,\Lambda_{\mathrm{Meral}}^{(0)} = 0.2044088237$, $\beta_0 = 1/2$, $\eta_{\mathcal{T}_0} = 0.1434$, and $S_{\mathrm{loss}} = 19.7511425152$) to magnetic-confinement fusion tokamaks (ITER and SPARC) and across 30 orders of magnitude from quantum superfluids to galactic halos:
+\begin{enumerate}
+    \item \textbf{Tokamak H-Mode Pedestal and ELM Suppression (Theorem X.1, Test T26):} Locking Resonant Magnetic Perturbation (RMP) coils to the FENE-P helical flux-string lattice ($\chi\in[0,1)$) raises the critical peeling-ballooning pressure-gradient threshold by $\alpha_{\mathrm{crit}}^{\mathrm{string}}/\alpha_{\mathrm{crit}}^{\mathrm{std}} = 1 + \mu_s^{\mathrm{Meral}}(1+\beta_0^2\chi)/(1-\chi)$ ($1.970942\times$ at $\chi=0.75$). At over-pressured pedestal $\alpha_{\mathrm{MHD}} = 1.5\,\alpha_{\mathrm{crit}}^{\mathrm{std}}$, the standard filament ODE blows up exponentially whereas the string-protected filament remains bounded; $H_{98}^{\mathrm{string}} = 3.1560$ ($\chi=0.50$) and $5.5516$ ($\chi=0.75$) carry ITER and SPARC into the ignition regime.
+    \item \textbf{Disruption Runaway Electron-Positron Avalanche Quench (Theorem X.2, Test T27):} Chiral-elastic flux-string braking elevates the Connor--Hastie critical field by $E_c^{\mathrm{eff}}/E_c = S_{\mathrm{loss}}(1+4\Sigma_{\mathrm{string}})$ ($23.788450\times$ at $\chi=0$, $38.928355\times$ at $\chi=0.75$). In an $E_\parallel/E_c = 30$ disruption, the standard Rosenbluth--Putvinski growth rate $\gamma_{\mathrm{RA}}^{\mathrm{std}} = +33.5550\text{ s}^{-1}$ (exponential blowup) reverses under the $\chi=0.75$ shield to $\gamma_{\mathrm{RA}}^{\mathrm{string}} = -0.2654\text{ s}^{-1} < 0$ (complete quench).
+    \item \textbf{30-Decade Universal Scaling Law (Theorem X.3, Test T28):} The dimensionless saturation number $\Pi_{\mathrm{Meral}} = \mu_s^{\mathrm{Meral}}$ and shield invariant $\mathcal{I}_{\mathrm{shield}} = 2\sqrt{2}$ are independent of length scale $L_0$; six physical systems from the $^4\mathrm{He}$ vortex core ($10^{-10}\text{ m}$) to the Galactic 511 keV halo ($3\times 10^{20}\text{ m}$) lie on the universal line of exact unit slope $1.000000000000000$ ($R^2 = 1.0$) in the $\log_{10} r_{\mathrm{sat}}$ vs.\ $\log_{10} L_0$ plane.
+\end{enumerate}
+The numerical verification chain \texttt{T1--T28 (28/28 PASS)} and the independent 6-point cross-check script (\path{mini_check_x.py}, \texttt{15/15 PASS}) pass completely.
+\end{abstract}
+
+\section[Introduction and Scientific Honesty Framework]{Introduction and Scientific Honesty Framework \\ (Exact Theorem vs.\ Reactor and Multi-Scale Scaling Model)}
+
+In the Stationary Strings Theorem I--IX series [1--9], the Navier--Stokes vortex singularity was arrested by elastic string tension, Dirac--Majorana chiral peeling and the closed-form constant $\Lambda_{\mathrm{Meral}}^{(0)} = 0.07226943267767906$ were derived, CERN ALPHA/BASE-STEP trap matches [10--12] and falsifiable bands were established, and the Super-Brillouin antimatter storage regime was proven. This 10th work addresses two questions: \textit{(i) Can the same FENE-P flux-string and chiral-elastic shield mechanism arrest Edge-Localized Modes (ELMs) and runaway electron-positron avalanches in fusion tokamaks (ITER, SPARC)? (ii) Can 30 orders of magnitude from quantum vortices to galactic halos be unified by a single dimensionless scaling law?}
+
+\textbf{Distinction Between Exact Mathematical Theorem and Reactor / Multi-Scale Scaling Model:}
+\begin{itemize}
+    \item \textbf{Exact Theorem (experiment-independent mathematical truth):} The peeling-ballooning threshold multiplier $1+4\Sigma_{\mathrm{string}}$ (Eq.~\ref{eq:t26_alpha}), Radau and RK4 integration of the linearized ELM filament ODE, the Connor--Hastie critical field $E_c$ and string-enhanced $E_c^{\mathrm{eff}}/E_c = S_{\mathrm{loss}}(1+4\Sigma_{\mathrm{string}})$ algebra (Eq.~\ref{eq:t27_ec}), the Rosenbluth--Putvinski growth-rate sign reversal, the algebraic identities $\Pi_{\mathrm{Meral}} = \mu_s^{\mathrm{Meral}}$ and $\mathcal{I}_{\mathrm{shield}} = 2\sqrt{2}$ (Eq.~\ref{eq:t28_pi}), and the 30-decade log-log regression slope ($m = 1.0$, $R^2=1.0$).
+    \item \textbf{Reactor and Multi-Scale Scaling Model (open to experimental test):} The pedestal barrier fraction $f_{\mathrm{barrier}}(\chi) = \Sigma_{\mathrm{string}}(\mu_s^{\mathrm{Meral}},\chi)$, the quadratic fusion gain scaling $Q_{\mathrm{fusion}} = Q_{\mathrm{std}} H_{98}^2$, the ITER and SPARC reference pedestal parameters [13,14], and transport of the universal saturation ratio $\mathcal{C}_{\mathrm{univ}} = F_{\mathrm{base}}/F_{\mathrm{eff}} = 1.626038$ across six physical scales.
+    \item \textbf{Locked zero-parameter inputs:} $\Lambda_{\mathrm{Meral}}^{(0)} = 0.07226943267767906$, coupling $\mu_s^{\mathrm{Meral}} = 2\sqrt{2}\,\Lambda_{\mathrm{Meral}}^{(0)} = 0.2044088237$, $\beta_0 = 1/2$, $\eta_{\mathcal{T}_0} = 0.1434$, and $S_{\mathrm{loss}} = e^{2\sqrt{2}}/(1-\eta_{\mathcal{T}_0}) = 19.7511425152$. No new free parameters are introduced.
+\end{itemize}
+
+\section{Task 20 / Test T26 --- Tokamak H-Mode Pedestal, ELM Suppression, and Lawson Gain}
+
+In the edge pedestal ($r\in[a-\Delta_{\mathrm{ped}},a]$) of a tokamak plasma [13--16], radial $\vec{E}\times\vec{B}$ shear coupled to poloidal flux-tube dynamics is isomorphic to the Theorem V two-field $(F,\tilde{\ell})$ system. When the normalized pressure gradient $\alpha_{\mathrm{MHD}} = -(2\mu_0 q_{\mathrm{saf}}^2 R_0/B_0^2)(dp/dr)$ exceeds the classical peeling-ballooning threshold $\alpha_{\mathrm{crit}}^{\mathrm{std}}$, edge flux filaments blow up in finite time and expel Type-I ELM energy onto the divertor. Locking Resonant Magnetic Perturbation (RMP) coils to the FENE-P helical flux-string lattice yields:
+
+\textbf{Theorem X.1 (Super-Peeling-Ballooning Limit and ELM Arrest):} \textit{Under helical FENE-P flux-string hoop tension $-\omega_A^2\Sigma_{\mathrm{string}}(\mu_s^{\mathrm{Meral}},\chi)$, the critical peeling-ballooning pressure-gradient threshold and pedestal confinement enhancement factor rise to:}
+\begin{equation}
+\boxed{\frac{\alpha_{\mathrm{crit}}^{\mathrm{string}}(\mu_s^{\mathrm{Meral}},\chi)}{\alpha_{\mathrm{crit}}^{\mathrm{std}}}
+= 1 + \mu_s^{\mathrm{Meral}}\frac{1+\beta_0^2\chi}{1-\chi},
+\qquad
+H_{98}^{\mathrm{string}}(\chi)
+= 1 + \left(S_{\mathrm{loss}} - 1\right)\Sigma_{\mathrm{string}}(\mu_s^{\mathrm{Meral}},\chi)}
+\label{eq:t26_alpha}
+\end{equation}
+\textit{In the window $\alpha_{\mathrm{crit}}^{\mathrm{std}} < \alpha_{\mathrm{MHD}} \le \alpha_{\mathrm{crit}}^{\mathrm{string}}$, the standard filament ODE ($\mu_s=0$) explodes exponentially whereas the string-protected filament amplitude remains harmonically bounded inside the pedestal ($r_{\mathrm{fil}}^{\max} \le r_0$). $\square$}
+
+Table~\ref{tab:t26} reports the Super-H gains for ITER ($B_0=5.3\text{ T}$, $R_0=6.2\text{ m}$, $a=2.0\text{ m}$, $I_p=15\text{ MA}$, $n_{e,\mathrm{ped}}=10^{20}\text{ m}^{-3}$, $T_i=20\text{ keV}$, $\tau_{E,\mathrm{std}}=3.7\text{ s}$, $Q_{\mathrm{std}}=10$ [13]) and SPARC ($B_0=12.2\text{ T}$, $R_0=1.85\text{ m}$, $a=0.57\text{ m}$, $I_p=8.7\text{ MA}$, $n_{e,\mathrm{ped}}=4\times 10^{20}\text{ m}^{-3}$, $T_i=20\text{ keV}$, $\tau_{E,\mathrm{std}}=0.77\text{ s}$, $Q_{\mathrm{std}}=11$ [14]; Figure~\ref{fig:fig12}(a)).
+
+\begin{table}[!htbp]
+\centering
+\footnotesize
+\setlength{\tabcolsep}{2pt}
+\caption{\textbf{Tokamak Super-Peeling-Ballooning Threshold, ELM ODE, and ITER/SPARC Lawson Gain} (Test T26).}
+\label{tab:t26}
+\vspace{0.1cm}
+\begin{tabular}{@{}l|c|c|c@{}}
+\hline
+\textbf{Parameter / Output} & \textbf{Standard} & \textbf{RMP $\chi=0.50$} & \textbf{RMP $\chi=0.75$} \\
+\hline
+$\alpha_{\mathrm{crit}}^{\mathrm{string}}/\alpha_{\mathrm{crit}}^{\mathrm{std}}$ ($\chi=0$: $1.2044$) & $1.000000$ & $1.459920$ & $1.970942$ \\
+Pedestal factor $H_{98}^{\mathrm{string}}$ ($\chi=0.90$: $12.74$) & $1.000000$ & $3.156006$ & $5.551568$ \\
+ELM ODE ($\alpha_{\mathrm{MHD}}=1.5\alpha_{\mathrm{crit}}^{\mathrm{std}}$, $\tau=40$) & $r_{\mathrm{end}}=6.93\times 10^5$ & --- & $r_{\max}=1.0000$ \\
+ITER: $\tau_E$ / $n_i T_i \tau_E$ ($10^{21}$) / $Q$ & $3.70$ / $7.40$ / $10.0$ & $11.68$ / $23.35$ / $99.60$ & $20.54$ / $41.08$ / $308.2$ \\
+SPARC: $\tau_E$ / $n_i T_i \tau_E$ ($10^{21}$) / $Q$ & $0.77$ / $6.16$ / $11.0$ & $2.43$ / $19.44$ / $109.6$ & $4.27$ / $34.20$ / $339.0$ \\
+\hline
+\end{tabular}
+\end{table}
+
+\section[Task 21 / Test T27 --- Disruption Runaway Quench]{Task 21 / Test T27 --- Disruption Runaway \\ Electron-Positron Avalanche Quench}
+
+During a thermal quench, the inductive parallel field $E_\parallel$ exceeds the classical Connor--Hastie threshold $E_c = n_e e^3\ln\Lambda/(4\pi\varepsilon_0^2 m_e c^2)$ [17,18] by $20$--$50\times$, driving a Rosenbluth--Putvinski secondary avalanche and positron/511 keV emission via pair production ($e^- Z \to e^- e^+ e^- Z$):
+
+\textbf{Theorem X.2 (Chiral-Elastic Critical Field Enhancement and Quench):} \textit{Under Theorem VI chiral helicity conversion and Theorem IX.3 loss suppression $S_{\mathrm{loss}}$, the effective critical avalanche field and net growth rate become:}
+\begin{equation}
+\begin{split}
+\frac{E_c^{\mathrm{eff}}(\mu_s^{\mathrm{Meral}},\chi)}{E_c}
+&= S_{\mathrm{loss}}\left(1 + \mu_s^{\mathrm{Meral}}\frac{1+\beta_0^2\chi}{1-\chi}\right), \\
+\gamma_{\mathrm{RA}}^{\mathrm{string}}(\chi)
+&= \frac{1}{\tau_{\mathrm{rel}}\ln\Lambda}\sqrt{\frac{\pi}{3(Z_{\mathrm{eff}}+5)}}
+\left(\frac{E_\parallel}{E_c^{\mathrm{eff}}(\mu_s^{\mathrm{Meral}},\chi)} - 1\right)
+\end{split}
+\label{eq:t27_ec}
+\end{equation}
+\textit{For $E_c < E_\parallel < E_c^{\mathrm{eff}}(\mu_s^{\mathrm{Meral}},\chi)$, the standard avalanche ($\gamma_{\mathrm{RA}}^{\mathrm{std}} > 0$) blows up exponentially whereas the string-shielded avalanche ($\gamma_{\mathrm{RA}}^{\mathrm{string}} < 0$) self-quenches. $\square$}
+
+At reference disruption parameters ($n_e=10^{20}\text{ m}^{-3}$, $\ln\Lambda=16$, $Z_{\mathrm{eff}}=2$: $E_c=0.081586\text{ V/m}$, $\tau_{\mathrm{rel}}=2.089228\times 10^{-2}\text{ s}$) with $E_\parallel/E_c = 30$, the $\chi=0.75$ shield yields $E_c^{\mathrm{eff}}/E_c = 38.928355 > 30$ and reverses the growth rate from $+33.5550\text{ s}^{-1}$ to $-0.2654\text{ s}^{-1}$ (Table~\ref{tab:t27}, Figure~\ref{fig:fig12}(b)).
+
+\begin{table}[!htbp]
+\centering
+\footnotesize
+\setlength{\tabcolsep}{2pt}
+\caption{\textbf{Connor--Hastie Critical Field Enhancement $E_c^{\mathrm{eff}}/E_c$ and Runaway Quench} (Test T27, $E_\parallel/E_c=30$).}
+\label{tab:t27}
+\vspace{0.1cm}
+\begin{tabular}{@{}l|c|c|c@{}}
+\hline
+\textbf{Operating Point ($\chi$)} & \textbf{$E_c^{\mathrm{eff}}/E_c$} & \textbf{$\gamma_{\mathrm{RA}}$ ($\text{s}^{-1}$)} & \textbf{Regime ($E_\parallel/E_c=30$)} \\
+\hline
+Standard ($\mu_s = 0$, unshielded) & $1.0000000000$ & $+33.555033$ & Exponential blowup \\
+Shielded free column ($\chi = 0.00$) & $23.7884503230$ & $+0.302116$ & Retarded \\
+Shielded helical lattice ($\chi = 0.50$) & $28.8350850828$ & $+0.046750$ & Marginal threshold \\
+Shielded helical lattice ($\chi = 0.75$) & $38.9283546022$ & $-0.265400$ & \textbf{Complete quench ($<0$)} \\
+Shielded helical lattice ($\chi = 0.90$) & $69.2081631607$ & $-0.655503$ & \textbf{Deep quench ($<0$)} \\
+\hline
+\end{tabular}
+\end{table}
+
+\section{Task 22 / Test T28 --- Universal Vortex-String Scaling Law Across 30 Orders of Magnitude}
+
+Across all axisymmetric vortex-string systems in Theorems I--X, defining the characteristic scale $L_0$, the saturation radius $r_{\mathrm{sat}} = \mathcal{C}_{\mathrm{univ}} L_0$ ($\mathcal{C}_{\mathrm{univ}} = F_{\mathrm{base}}(X_*,0)/F_{\mathrm{eff}}(X_*,s_{\mathrm{eq}}) = 1.626037936552$), and the normalized string-pressure factor $D_{\mathrm{str}} = (2X_*)^{-1}e^{-(1+2h)s_{\mathrm{eq}}}(\tilde{\ell}^2 - \ell_0^2)$ yields:
+
+\textbf{Theorem X.3 (Dimensionless Meral--Navier--Stokes Universal Scaling Invariant):} \textit{The dimensionless saturation number $\Pi_{\mathrm{Meral}}$ and chiral-elastic shield invariant $\mathcal{I}_{\mathrm{shield}}$ are identically independent of the characteristic length scale $L_0$:}
+\begin{equation}
+\begin{split}
+\Pi_{\mathrm{Meral}}
+&\equiv \frac{r_{\mathrm{sat}}^2 - L_0^2}{L_0^2}\cdot\frac{F_{\mathrm{eff}}^2(X_*,s_{\mathrm{eq}})}{D_{\mathrm{str}}(X_*,s_{\mathrm{eq}})}
+= \mu_s^{\mathrm{Meral}} = 0.2044088236755661, \\
+\mathcal{I}_{\mathrm{shield}}
+&\equiv \ln\!\left[S_{\mathrm{loss}}(1-\eta_{\mathcal{T}_0})\right]
+= \frac{\mu_s^{\mathrm{Meral}}}{\Lambda_{\mathrm{Meral}}^{(0)}}
+= 2\sqrt{2} = 2.8284271247461903
+\end{split}
+\label{eq:t28_pi}
+\end{equation}
+\textit{and the line $\log_{10} r_{\mathrm{sat}} = \log_{10} L_0 + \log_{10}\mathcal{C}_{\mathrm{univ}}$ has exact unit slope ($m = 1.000000000000000$, $R^2 = 1.0$) across 30 orders of magnitude from $10^{-10}\text{ m}$ to $10^{20}\text{ m}$. $\square$}
+
+Table~\ref{tab:t28_scales} lists the six physical scales [19,20] and Table~\ref{tab:t28_inv} summarizes the locked dimensionless invariants of the Theorem I--X corpus (Figure~\ref{fig:fig12}(c)--(d)).
+
+\begin{table}[!htbp]
+\centering
+\footnotesize
+\setlength{\tabcolsep}{2pt}
+\caption{\textbf{Six Physical Vortex-String Systems Across 30 Orders of Magnitude ($10^{-10}\text{ m}\to 10^{20}\text{ m}$)} (Test T28).}
+\label{tab:t28_scales}
+\vspace{0.1cm}
+\begin{tabular}{@{}l|c|c|c@{}}
+\hline
+\textbf{Physical System (Scales 1--6)} & \textbf{$L_0$ (m)} & \textbf{$r_{\mathrm{sat}}$ (m)} & \textbf{Local $\Pi_{\mathrm{Meral}}$} \\
+\hline
+1.\ Superfluid $^4\mathrm{He}$ vortex core [19] & $1.0000\times 10^{-10}$ & $1.626038\times 10^{-10}$ & $0.2044088237$ \\
+2.\ CERN Penning trap (T16, T19) & $9.8885\times 10^{-5}$ & $1.607907\times 10^{-4}$ & $0.2044088237$ \\
+3.\ ITER / SPARC H-mode pedestal (T26) & $4.0000\times 10^{-2}$ & $6.504152\times 10^{-2}$ & $0.2044088237$ \\
+4.\ Vela pulsar neutron crust [20] & $1.0000\times 10^{4}$ & $1.626038\times 10^{4}$ & $0.2044088237$ \\
+5.\ Sgr A* event-horizon ring (T15, T18) & $1.2200\times 10^{10}$ & $1.983766\times 10^{10}$ & $0.2044088237$ \\
+6.\ Galactic 511 keV halo (T22) & $3.0000\times 10^{20}$ & $4.878114\times 10^{20}$ & $0.2044088237$ \\
+\hline
+Log-log regression ($30.48$ decades) & \multicolumn{3}{c}{$m = 1.000000000000000$ ($|m-1|=2.22\times 10^{-16}$), $R^2 = 1.0$} \\
+\hline
+\end{tabular}
+\end{table}
+
+\begin{table}[!htbp]
+\centering
+\footnotesize
+\setlength{\tabcolsep}{2pt}
+\caption{\textbf{Locked Dimensionless Constants and Verification Rings of the Theorem I--X Corpus}.}
+\label{tab:t28_inv}
+\vspace{0.1cm}
+\begin{tabular}{@{}l|c|c@{}}
+\hline
+\textbf{Universal Constant / Invariant} & \textbf{Closed Form / Definition} & \textbf{Numerical Value (Ring)} \\
+\hline
+Meral constant $\Lambda_{\mathrm{Meral}}^{(0)}$ & $\frac{14}{79}\!\left[\frac{163}{578}+\frac{64\sqrt{17}}{4913}\ln\!\frac{21+5\sqrt{17}}{4}\right]$ & $0.07226943267767906$ (T14) \\
+Zero-parameter coupling $\mu_s^{\mathrm{Meral}}$ & $2\sqrt{2}\,\Lambda_{\mathrm{Meral}}^{(0)} = \Pi_{\mathrm{Meral}}$ & $0.20440882367556615$ (T16) \\
+Shear suppression fraction $\eta_{\mathcal{T}_0}$ & $1 - \|\mathcal{T}_{0,\mathrm{eff}}\|_\infty / \|\mathcal{T}_0\|_\infty$ & $0.1434$ (T8) \\
+Shield invariant $\mathcal{I}_{\mathrm{shield}}$ & $\mu_s^{\mathrm{Meral}}/\Lambda_{\mathrm{Meral}}^{(0)} = \ln[S_{\mathrm{loss}}(1-\eta_{\mathcal{T}_0})]$ & $2\sqrt{2} = 2.8284271247$ (T25) \\
+Loss suppression factor $S_{\mathrm{loss}}$ & $e^{2\sqrt{2}}/(1-\eta_{\mathcal{T}_0})$ & $19.751142515244$ (T25--T27) \\
+Universal saturation ratio $\mathcal{C}_{\mathrm{univ}}$ & $r_{\mathrm{sat}}/L_0 = F_{\mathrm{base}}(X_*,0)/F_{\mathrm{eff}}(X_*,s_{\mathrm{eq}})$ & $1.626037936552$ (T16, T28) \\
+Exact 1949 Ore--Powell norm & $\int_0^{m_e} O_{\mathrm{exact}}(E)\,dE$ & $1.000000000000$ (T18, T22) \\
+\hline
+\end{tabular}
+\end{table}
+
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=\textwidth]{../figs/fig12_tokamak_elm_runaway_and_universal_scaling_en.pdf}
+\caption{\textbf{Tokamak H-mode/ELM suppression, runaway quench, and 30-decade universal scaling (2$\times$2):} (a) T26 standard ELM blowup vs.\ FENE-P RMP ($\chi=0.75$) bounded oscillation and $H_{98}$ gain at $\alpha_{\mathrm{MHD}}=1.5\alpha_{\mathrm{crit}}^{\mathrm{std}}$, (b) T27 runaway electron-positron avalanche $I_{\mathrm{RE}}(t)/I_0$ in an $E_\parallel/E_c=30$ disruption (standard blowup vs.\ complete quench at $\chi=0.75$), (c) T28 30-decade universal scaling line from $^4\mathrm{He}$ vortex ($10^{-10}\text{ m}$) to Galactic halo ($3\times 10^{20}\text{ m}$, $\mathrm{slope}=1.0000$), (d) locked dimensionless invariants of the Theorem I--X series (\texttt{T1--T28: 28/28 PASS}).}
+\label{fig:fig12}
+\end{figure}
+
+\clearpage
+
+\section[Conclusion, Corpus Synthesis, and Reproducibility]{Conclusion, Corpus Synthesis (Theorem I--X), \\ and Reproducibility Instructions}
+
+Stationary Strings Theorem X completes the 10-paper series: the FENE-P flux-string mechanism arresting the Navier--Stokes vortex singularity and the closed-form constant $\Lambda_{\mathrm{Meral}}^{(0)}$ unify Super-Brillouin antimatter storage in Penning traps (Theorem IX), ELM-free Super-H confinement and runaway avalanche quench in fusion tokamaks (Theorem X.1--X.2), and the unit-slope universal scaling law across 30 orders of magnitude from $10^{-10}\text{ m}$ to $10^{20}\text{ m}$ (Theorem X.3) within a single zero-parameter framework.
+
+\subsection*{Data, Code Availability, and Independent Verification}
+All solver codes and figure generators are available as open source at \url{https://github.com/fahrim/stationary-strings-v} (\path{duran_sicimler_sim/}) and in this paper's repository \url{https://github.com/fahrim/stationary-strings-x}:
+\begin{itemize}
+    \item Full verification chain (\texttt{T1--T28}, \texttt{28/28 PASS}): \texttt{python} \path{duran_sicimler_sim/solver_engine.py}
+    \item Independent 6-point cross-check (does not import solver, \texttt{15/15 PASS}): \texttt{python} \path{duran_sicimler_sim/mini_check_x.py}
+    \item Figure~\ref{fig:fig12} generation (TR and EN): \texttt{python} \path{duran_sicimler_sim/generate_figures.py} (\texttt{fig12('tr')} / \texttt{fig12('en')})
+\end{itemize}
+
+\begin{thebibliography}{99}
+    \bibitem{meral1} Meral, F. (2025a). \textit{Stationary Strings Theorem: Rebirth of Perfect Order in the Absence of Time and Entropy}. Open-source package: \texttt{stationary-strings-i} (\url{https://github.com/fahrim/stationary-strings-i}).
+    \bibitem{meral2} Meral, F. (2025b). \textit{Stationary Strings Theorem II: Relativity, Phase Transition, and the Cosmological Cycle of Information}. Open-source package: \texttt{stationary-strings-ii} (\url{https://github.com/fahrim/stationary-strings-ii}).
+    \bibitem{meral3} Meral, F. (2026a). \textit{Stationary Strings Theorem III: Two-Dimensional Twinning of Matter, Vortex Singularity, and Phase Separation into Information}. Open-source package: \texttt{stationary-strings-iii} (\url{https://github.com/fahrim/stationary-strings-iii}).
+    \bibitem{meral4} Meral, F. (2026b). \textit{Stationary Strings Theorem IV: Cosmic Fission, Vortex Fuel, and the Singularity-Free Information Core}. Open-source package: \texttt{stationary-strings-iv} (\url{https://github.com/fahrim/stationary-strings-iv}).
+    \bibitem{meral5} Meral, F. (2026c). \textit{Stationary Strings Theorem V: Arrest of the Navier--Stokes Vortex Singularity by Elastic String Tension}. Open-source solver package: \texttt{stationary-strings-v} (\url{https://github.com/fahrim/stationary-strings-v}, \path{duran_sicimler_sim/solver_engine.py}).
+    \bibitem{meral6} Meral, F. (2026d). \textit{Stationary Strings Theorem VI: Dirac--Majorana Chiral Peeling, the $\Lambda_{\mathrm{Meral}}$ Constant, and CERN Synthesis}. Open-source package: \texttt{stationary-strings-vi} (\url{https://github.com/fahrim/stationary-strings-vi}).
+    \bibitem{meral7} Meral, F. (2026e). \textit{Stationary Strings Theorem VII: Self-Consistent Vortex Saturation in CERN ALPHA Traps, Lineshape, and the Ore--Powell Solution}. Open-source package: \texttt{stationary-strings-vii} (\url{https://github.com/fahrim/stationary-strings-vii}).
+    \bibitem{meral8} Meral, F. (2026f). \textit{Stationary Strings Theorem VIII: Falsifiable Predictions, 511 keV Spectral Band, and Uncertainty Quantification}. Open-source package: \texttt{stationary-strings-viii} (\url{https://github.com/fahrim/stationary-strings-viii}).
+    \bibitem{meral9} Meral, F. (2026g). \textit{Stationary Strings Theorem IX: The Super-Brillouin Regime, Abrikosov--Diocotron Vortex Crystallization, and the Chiral-Elastic Annihilation Shield}. Open-source package: \texttt{stationary-strings-ix} (\url{https://github.com/fahrim/stationary-strings-ix}).
+    \bibitem{akbari2025} Akbari, R. \textit{et al.} (ALPHA Collaboration). (2025). Be$^+$ assisted, simultaneous confinement of more than 15000 antihydrogen atoms. \textit{Nat.\ Commun.\ \textbf{16}}, 10106. \url{https://doi.org/10.1038/s41467-025-65085-4}
+    \bibitem{alpha2026} Akbari, R. \textit{et al.} (ALPHA Collaboration). (2026). Four ppm measurement of the antihydrogen ground-state hyperfine splitting. \textit{Nature} \textbf{653}, 1022--1026. \url{https://doi.org/10.1038/s41586-026-10556-x}
+    \bibitem{base2026} Leonhardt, M., Morgner, J. \textit{et al.} (BASE Collaboration). (2026). Road transport of trapped antiprotons. \textit{Nature} \textbf{657}, 906--911. \url{https://doi.org/10.1038/s41586-026-11019-z}
+    \bibitem{iter1999} ITER Physics Basis Editors. (1999). Chapter 1: Overview and summary. \textit{Nucl.\ Fusion} \textbf{39}, 2137--2174.
+    \bibitem{creely2020} Creely, A.~J. \textit{et al.} (SPARC Team). (2020). Overview of the SPARC tokamak. \textit{J.\ Plasma Phys.\ \textbf{86}}, 865860502.
+    \bibitem{wagner1982} Wagner, F. \textit{et al.} (1982). Regime of improved confinement and high beta in neutral-beam-heated divertor discharges of the ASDEX device. \textit{Phys.\ Rev.\ Lett.\ \textbf{49}}, 1408--1412.
+    \bibitem{evans2006} Evans, T.~E. \textit{et al.} (2006). Edge stability and transport control with resonant magnetic perturbations in collisionless tokamak plasmas. \textit{Nat.\ Phys.\ \textbf{2}}, 419--423.
+    \bibitem{connor1975} Connor, J.~W. \& Hastie, R.~J. (1975). Relativistic limitations on runaway electrons. \textit{Nucl.\ Fusion} \textbf{15}, 415--424.
+    \bibitem{rosenbluth1997} Rosenbluth, M.~N. \& Putvinski, S.~V. (1997). Theory for avalanche of runaway electrons in tokamaks. \textit{Nucl.\ Fusion} \textbf{37}, 1355--1362.
+    \bibitem{donnelly1991} Donnelly, R.~J. (1991). \textit{Quantized Vortices in Helium II}. Cambridge University Press.
+    \bibitem{anderson1975} Anderson, P.~W. \& Itoh, N. (1975). Pulsar glitches and restlessness as a hard superfluidity phenomenon. \textit{Nature} \textbf{256}, 25--27.
+\end{thebibliography}
+
+\end{document}
