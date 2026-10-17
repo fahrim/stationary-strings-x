@@ -19,7 +19,7 @@ Yazar: Fahri Meral · Tarih: 17 Ekim 2026 · Sürüm: v1 (Makale X)
 | `figs/fig12_tokamak_elm_runaway_and_universal_scaling_en.pdf` | Test T26–T28 şekli (EN, 2×2) |
 | `figs/fig12_tokamak_elm_runaway_and_universal_scaling_en.png` | Test T26–T28 şekil önizlemesi (EN) |
 | `CITATION.cff` | Atıf kaydı |
-| `LICENSE` | MIT |
+| `LICENSE` | CC BY 4.0 |
 
 ## Sayısal üretim
 
@@ -44,4 +44,4 @@ Bağımsız çapraz kontrol çözücüyü import etmez.
 
 ## Lisans
 
-MIT — bkz. `LICENSE`. İçerik hakem denetiminden geçmemiştir.
+CC BY 4.0 — bkz. `LICENSE`. İçerik hakem denetiminden geçmemiştir.

@@ -19,7 +19,7 @@ Author: Fahri Meral · Date: October 17, 2026 · Version: v1 (Paper X)
 | `figs/fig12_tokamak_elm_runaway_and_universal_scaling_en.pdf` | Tests T26–T28 figure (EN, 2×2) |
 | `figs/fig12_tokamak_elm_runaway_and_universal_scaling_en.png` | Tests T26–T28 figure preview (EN) |
 | `CITATION.cff` | Citation record |
-| `LICENSE` | MIT |
+| `LICENSE` | CC BY 4.0 |
 
 ## Numerical reproduction
 
@@ -45,4 +45,4 @@ The independent cross-check never imports the solver.
 
 ## License
 
-MIT — see `LICENSE`. Content is not peer-reviewed.
+CC BY 4.0 — see `LICENSE`. Content is not peer-reviewed.
