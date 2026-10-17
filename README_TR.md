@@ -2,6 +2,9 @@
 
 > **English:** [README.md](./README.md)
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23437159.svg)](https://doi.org/10.5281/zenodo.23437159)
+[![License: CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg)](LICENSE)
+
 **Duran Sicimler Teoremi X: Tokamak H-Modu ve ELM Bastırması, Kaçak Elektron-Pozitron Çığ Doyumu ve 30-Mertebeli Evrensel Girdap-Sicim Ölçekleme Yasası**
 
 Yazar: Fahri Meral · Tarih: 17 Ekim 2026 · Sürüm: v1 (Makale X)

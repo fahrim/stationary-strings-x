@@ -2,6 +2,9 @@
 
 > **Türkçe:** [README_TR.md](./README_TR.md)
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23437159.svg)](https://doi.org/10.5281/zenodo.23437159)
+[![License: CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg)](LICENSE)
+
 **Stationary Strings Theorem X: Tokamak H-Mode and ELM Suppression, Runaway Electron-Positron Avalanche Quench, and the 30-Decade Universal Vortex-String Scaling Law**
 
 Author: Fahri Meral · Date: October 17, 2026 · Version: v1 (Paper X)
