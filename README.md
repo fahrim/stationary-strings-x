@@ -46,6 +46,20 @@ The independent cross-check never imports the solver.
 - T27 (Theorem X.2): Chiral-elastic critical field enhancement `E_c^eff/E_c = S_loss(1+4Σ_string) = 23.788450` (`χ=0`) and `38.928355` (`χ=0.75`), quenching `E_||/E_c = 30` disruption runaway avalanches (`γ_RA^std = +33.5550 /s → γ_RA^string = −0.2654 /s < 0`).
 - T28 (Theorem X.3): Scale-independent invariants `Π_Meral = µ_s^Meral = 0.2044088237` and `I_shield = 2√2`, with unit-slope (`m = 1.000000000000000`, `R^2 = 1.0`) universal scaling across 30 orders of magnitude (`10^-10 m → 3×10^20 m`).
 
+## Citation
+
+```bibtex
+@misc{meral2026duranX,
+  author = {Fahri Meral},
+  title  = {Stationary Strings Theorem X: Tokamak H-Mode and ELM Suppression, Runaway Electron-Positron Avalanche Quench, and the 30-Decade Universal Vortex-String Scaling Law},
+  year   = {2026},
+  doi    = {10.5281/zenodo.23437159},
+  url    = {https://github.com/fahrim/stationary-strings-x}
+}
+```
+
+See also `CITATION.cff`.
+
 ## License
 
 CC BY 4.0 — see `LICENSE`. Content is not peer-reviewed.

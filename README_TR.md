@@ -45,6 +45,20 @@ Bağımsız çapraz kontrol çözücüyü import etmez.
 - T27 (Teorem X.2): Kiral-elastik kritik alan yükseltmesi `E_c^eff/E_c = S_loss(1+4Σ_string) = 23,788450` (`χ=0`) ve `38,928355` (`χ=0,75`); `E_||/E_c = 30` tokamak yıkımında kaçak çığın tam sönümlenmesi (`γ_RA^std = +33,5550 /s → γ_RA^string = −0,2654 /s < 0`).
 - T28 (Teorem X.3): Ölçekten bağımsız `Π_Meral = µ_s^Meral = 0,2044088237` ve `I_shield = 2√2` değişmezleri ile 30 büyüklük mertebesi (`10^-10 m → 3×10^20 m`) boyunca birim eğimli (`m = 1,000000000000000`, `R^2 = 1,0`) evrensel ölçekleme doğrusu.
 
+## Alıntı
+
+```bibtex
+@misc{meral2026duranX,
+  author = {Fahri Meral},
+  title  = {Duran Sicimler Teoremi X: Tokamak H-Modu ve ELM Bastırması, Kaçak Elektron-Pozitron Çığ Doyumu ve 30-Mertebeli Evrensel Girdap-Sicim Ölçekleme Yasası},
+  year   = {2026},
+  doi    = {10.5281/zenodo.23437159},
+  url    = {https://github.com/fahrim/stationary-strings-x}
+}
+```
+
+`CITATION.cff` dosyasına da bakınız.
+
 ## Lisans
 
 CC BY 4.0 — bkz. `LICENSE`. İçerik hakem denetiminden geçmemiştir.
